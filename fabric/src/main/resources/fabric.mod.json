@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "helpfulhitboxes",
+  "version": "${version}",
+  "name": "Helpful Hitboxes",
+  "description": "Makes the visual hitbox of certain small blocks larger when you're holding a block of that type, to help with building",
+  "authors": [
+    "abigailfails"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/helpful-hitboxes",
+    "sources": "https://github.com/abigailfails/HelpfulHitboxes",
+    "issues": "https://github.com/abigailfails/HelpfulHitboxes/issues"
+  },
+  "license": "https://github.com/abigailfails/HelpfulHitboxes/blob/main/LICENSE",
+  "icon": "assets/helpfulhitboxes/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.github.abigailfails.helpfulhitboxes.fabric.HelpfulHitboxesFabric"
+    ]
+  },
+  "mixins": [
+    "helpfulhitboxes-common.mixins.json",
+    "helpfulhitboxes.mixins.json"
+  ],
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.19"
+  }
+}

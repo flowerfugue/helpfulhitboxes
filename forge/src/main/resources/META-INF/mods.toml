@@ -1,0 +1,30 @@
+modLoader = "javafml"
+loaderVersion = "[41,)"
+issueTrackerURL = "https://github.com/abigailfails/HelpfulHitboxes/issues"
+license = "https://github.com/abigailfails/HelpfulHitboxes/blob/main/LICENSE"
+
+[[mods]]
+modId = "helpfulhitboxes"
+version = "${version}"
+displayURL = "https://www.curseforge.com/minecraft/mc-mods/helpful-hitboxes"
+logoFile = "assets/helpfulhitboxes/icon.png"
+displayName = "Helpful Hitboxes"
+authors = "abigailfails"
+description = '''
+Makes the visual hitbox of certain small blocks larger when you're holding a block of that type, to help with building.
+'''
+#logoFile = ""
+
+[[dependencies.helpfulhitboxes]]
+modId = "forge"
+mandatory = true
+versionRange = "[41.0.94,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.helpfulhitboxes]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.19,)"
+ordering = "NONE"
+side = "BOTH"
