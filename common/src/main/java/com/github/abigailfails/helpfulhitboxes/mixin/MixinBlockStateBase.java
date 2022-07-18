@@ -23,7 +23,7 @@ public class MixinBlockStateBase {
     }
 
     @Inject(at = @At("HEAD"), method = "getShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;", cancellable = true) //TODO should it really be getshape? this is only clientside but still, what if other entities use it
-    private void modifyGetVisualShape(BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir){
+    private void modifyGetShape(BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir){
         if (HelpfulHitboxes.COMPATIBLE_BLOCKS != null && collisionContext instanceof EntityCollisionContext entityContext) {
             String targetName = this.getBlock().getDescriptionId();
             String heldName = entityContext.heldItem.getDescriptionId();
