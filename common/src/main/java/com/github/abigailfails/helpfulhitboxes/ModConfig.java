@@ -113,8 +113,26 @@ public class ModConfig {
         compatibleBlocks.add(fencesObject);
 
         JsonArray panes = new JsonArray();
+        //Adding the loader tags in case mods add new panes
         panes.add("#forge:glass_panes");
         panes.add("#c:glass_panes");
+        panes.add("minecraft:glass_pane");
+        panes.add("minecraft:gray_stained_glass_pane");
+        panes.add("minecraft:black_stained_glass_pane");
+        panes.add("minecraft:orange_stained_glass_pane");
+        panes.add("minecraft:blue_stained_glass_pane");
+        panes.add("minecraft:brown_stained_glass_pane");
+        panes.add("minecraft:cyan_stained_glass_pane");
+        panes.add("minecraft:green_stained_glass_pane");
+        panes.add("minecraft:light_blue_stained_glass_pane");
+        panes.add("minecraft:light_gray_stained_glass_pane");
+        panes.add("minecraft:lime_stained_glass_pane");
+        panes.add("minecraft:magenta_stained_glass_pane");
+        panes.add("minecraft:pink_stained_glass_pane");
+        panes.add("minecraft:purple_stained_glass_pane");
+        panes.add("minecraft:red_stained_glass_pane");
+        panes.add("minecraft:white_stained_glass_pane");
+        panes.add("minecraft:yellow_stained_glass_pane");
         panes.add("minecraft:iron_bars");
         JsonObject panesObject = new JsonObject();
         panesObject.add("group", panes);
