@@ -13,7 +13,7 @@
     "issues": "https://github.com/abigailfails/HelpfulHitboxes/issues"
   },
   "license": "https://github.com/abigailfails/HelpfulHitboxes/blob/main/LICENSE",
-  "icon": "assets/helpfulhitboxes/icon.png",
+  "icon": "helpfulhitboxes.png",
   "environment": "*",
   "entrypoints": {
     "main": [
