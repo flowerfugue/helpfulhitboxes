@@ -13,9 +13,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(HelpfulHitboxes.MOD_ID)
-public class HelpulHitboxesForge {
+public class HelpfulHitboxesForge {
 
-    public HelpulHitboxesForge() {
+    public HelpfulHitboxesForge() {
         HelpfulHitboxes.init();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::addClientReloadListeners);
         MinecraftForge.EVENT_BUS.addListener(this::onWorldLoad);
@@ -37,6 +37,6 @@ public class HelpulHitboxesForge {
 
     private void onWorldLoad(LevelEvent.Load event) {
         if (event.getLevel().isClientSide())
-            ModConfig.fillAllTagsInCompatibleBlocks();
+            HelpfulHitboxes.COMPATIBLE_BLOCKS.updateTags();
     }
 }

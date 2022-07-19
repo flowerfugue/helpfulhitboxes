@@ -19,8 +19,6 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.github.abigailfails.helpfulhitboxes.HelpfulHitboxes.COMPATIBLE_BLOCKS;
-
 public class ModConfig {
     public static final String CONFIG_FILE = getConfigDirectory().toString() + "/helpfulhitboxes.json";
 
@@ -33,15 +31,7 @@ public class ModConfig {
         throw new AssertionError();
     }
 
-    /**
-     * Replaces placeholder tag IDs with their elements in the compatible block list. Invoked on world start.
-     * */
-    public static void fillAllTagsInCompatibleBlocks() {
-        fillTagsInBlockList(HelpfulHitboxes.COMPATIBLE_BLOCKS.ungroupedBlocks());
-        HelpfulHitboxes.COMPATIBLE_BLOCKS.blockGroups().forEach(ModConfig::fillTagsInBlockList);
-    }
-
-    private static void fillTagsInBlockList(HashSet<String> blockList) {
+    public static void updateTagsInBlockList(HashSet<String> blockList) {
         List<String> toAdd = new ArrayList<>();
         List<String> toRemove = new ArrayList<>();
         for (String string : blockList) {
@@ -105,6 +95,7 @@ public class ModConfig {
         JsonArray compatibleBlocks = new JsonArray();
         compatibleBlocks.add("minecraft:chain");
         compatibleBlocks.add("minecraft:end_rod");
+        compatibleBlocks.add("minecraft:scaffolding");
 
         JsonArray fences = new JsonArray();
         fences.add("#minecraft:fences");

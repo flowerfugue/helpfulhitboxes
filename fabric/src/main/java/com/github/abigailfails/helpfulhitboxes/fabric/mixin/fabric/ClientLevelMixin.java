@@ -1,5 +1,6 @@
 package com.github.abigailfails.helpfulhitboxes.fabric.mixin.fabric;
 
+import com.github.abigailfails.helpfulhitboxes.HelpfulHitboxes;
 import com.github.abigailfails.helpfulhitboxes.ModConfig;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.ClientPacketListener;
@@ -17,6 +18,6 @@ import java.util.function.Supplier;
 public class ClientLevelMixin {
     @Inject(at = @At("TAIL"), method = "<init>")
     private void updateBlockListTags(ClientPacketListener clientPacketListener, ClientLevel.ClientLevelData clientLevelData, ResourceKey resourceKey, Holder holder, int i, int j, Supplier supplier, LevelRenderer levelRenderer, boolean bl, long l, CallbackInfo ci) {
-        ModConfig.fillAllTagsInCompatibleBlocks();
+        HelpfulHitboxes.COMPATIBLE_BLOCKS.updateTags();
     }
 }
