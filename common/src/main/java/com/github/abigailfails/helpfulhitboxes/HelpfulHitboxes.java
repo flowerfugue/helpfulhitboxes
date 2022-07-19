@@ -17,8 +17,8 @@ public class HelpfulHitboxes {
         }
 
         public void updateTags() {
-            ModConfig.updateTagsInBlockList(HelpfulHitboxes.COMPATIBLE_BLOCKS.ungroupedBlocks());
-            HelpfulHitboxes.COMPATIBLE_BLOCKS.blockGroups().forEach(ModConfig::updateTagsInBlockList);
+            ModConfig.updateTagsInBlockList(this.ungroupedBlocks());
+            this.blockGroups().forEach(ModConfig::updateTagsInBlockList);
         }
     }
 

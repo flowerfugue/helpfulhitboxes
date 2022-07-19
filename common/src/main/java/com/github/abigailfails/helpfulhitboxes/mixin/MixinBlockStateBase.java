@@ -28,7 +28,7 @@ public class MixinBlockStateBase {
     private void modifyGetShape(BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir){
         if (HelpfulHitboxes.COMPATIBLE_BLOCKS != null && collisionContext instanceof EntityCollisionContext entityContext && entityContext.getEntity() instanceof Player player) {
             String targetName = this.getBlock().getDescriptionId();
-            if (HelpfulHitboxes.COMPATIBLE_BLOCKS.isCompatible(targetName, entityContext.heldItem.getDescriptionId()) ||
+            if (HelpfulHitboxes.COMPATIBLE_BLOCKS.isCompatible(targetName, (entityContext.heldItem != null ? entityContext.heldItem : player.getMainHandItem()).getDescriptionId()) ||
                     HelpfulHitboxes.COMPATIBLE_BLOCKS.isCompatible(targetName, player.getOffhandItem().getDescriptionId()))
                 cir.setReturnValue(Shapes.block());
         }

@@ -8,7 +8,7 @@ import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.level.LevelEvent;
+import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -18,7 +18,7 @@ public class HelpfulHitboxesForge {
     public HelpfulHitboxesForge() {
         HelpfulHitboxes.init();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::addClientReloadListeners);
-        MinecraftForge.EVENT_BUS.addListener(this::onWorldLoad);
+        MinecraftForge.EVENT_BUS.addListener(this::onTagsUpdated);
     }
 
     private void addClientReloadListeners(RegisterClientReloadListenersEvent event) {
@@ -35,8 +35,8 @@ public class HelpfulHitboxesForge {
         });
     }
 
-    private void onWorldLoad(LevelEvent.Load event) {
-        if (event.getLevel().isClientSide())
+    private void onTagsUpdated(TagsUpdatedEvent event) {
+        if (event.getUpdateCause().equals(TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED))
             HelpfulHitboxes.COMPATIBLE_BLOCKS.updateTags();
     }
 }

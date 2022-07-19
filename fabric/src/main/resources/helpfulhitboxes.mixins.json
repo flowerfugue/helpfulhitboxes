@@ -3,9 +3,9 @@
   "package": "com.github.abigailfails.helpfulhitboxes.fabric.mixin.fabric",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "ClientLevelMixin"
   ],
   "mixins": [
+    "ReloadableServerResourcesMixin"
   ],
   "injectors": {
     "defaultRequire": 1
