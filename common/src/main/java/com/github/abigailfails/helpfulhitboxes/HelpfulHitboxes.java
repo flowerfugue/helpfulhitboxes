@@ -1,7 +1,13 @@
 package com.github.abigailfails.helpfulhitboxes;
 
+import com.mojang.blaze3d.platform.InputConstants;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.client.OptionInstance;
+import net.minecraft.client.ToggleKeyMapping;
+
 import java.util.HashSet;
 
+//TODO implement keybind reader as suggested in the github issue
 public class HelpfulHitboxes {
     public static final String MOD_ID = "helpfulhitboxes";
     public static CompatibleBlockList COMPATIBLE_BLOCKS;
@@ -23,6 +29,7 @@ public class HelpfulHitboxes {
     }
 
     public static void init() {
+
     }
 
 }

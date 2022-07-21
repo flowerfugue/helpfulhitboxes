@@ -3,9 +3,11 @@
   "package": "com.github.abigailfails.helpfulhitboxes.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "OptionsMixin",
+    "AccessibilityOptionsScreenMixin"
   ],
   "mixins": [
-    "MixinBlockStateBase"
+    "BlockStateBaseMixin"
   ],
   "injectors": {
     "defaultRequire": 1
