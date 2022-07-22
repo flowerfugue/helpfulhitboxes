@@ -2,13 +2,10 @@ package com.github.abigailfails.helpfulhitboxes;
 
 import com.google.gson.*;
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.profiling.ProfilerFiller;
+import org.spongepowered.asm.logging.ILogger;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -62,38 +59,49 @@ public class ModConfig {
         return false;
     }
 
-    public static JsonArray readConfig(ResourceManager resourceManager, ProfilerFiller profilerFiller) {
-        JsonArray compatibleBlocks;
+    public static JsonObject readConfig() {
+        JsonObject configJson;
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try {
             if (!new File(CONFIG_FILE).exists()) {
-                JsonArray compatibleBlocksJson = defaultCompatibleBlocksJson();
-                compatibleBlocks = compatibleBlocksJson;
+                configJson = defaultConfigJson();
                 FileWriter writer = new FileWriter(CONFIG_FILE);
-                JsonObject config = new JsonObject();
-                config.add("compatible_blocks", compatibleBlocksJson);
-                gson.toJson(config, writer);
+                gson.toJson(configJson, writer);
                 writer.close();
             } else {
                 Reader reader = Files.newBufferedReader(Paths.get(CONFIG_FILE));
-                compatibleBlocks = gson.fromJson(reader, JsonObject.class).getAsJsonArray("compatible_blocks");
+                configJson = gson.fromJson(reader, JsonObject.class);
+                if (!Optional.ofNullable(configJson.get("all_blocks_use_full_hitboxes")).orElse(new JsonPrimitive("")).getAsBoolean()) {
+                    configJson.addProperty("all_blocks_use_full_hitboxes", false);
+                    FileWriter writer = new FileWriter(CONFIG_FILE);
+                    gson.toJson(configJson, writer);
+                    writer.close();
+                }
                 reader.close();
             }
         } catch (IOException | JsonParseException e) {
             Logger.getGlobal().log(Level.SEVERE, "Cannot access HelpfulHitboxes config file or it is invalid, reverting to default value...");
-            return defaultCompatibleBlocksJson();
+            return defaultConfigJson();
         }
-        return compatibleBlocks;
+        return configJson;
     }
 
-    public static void applyConfig(JsonArray json, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
-        HashSet<String> ungrouped = new HashSet<>();
-        HashSet<HashSet<String>> blockGroups = new HashSet<>();
-        readBlocklistFromJson(json, ungrouped, blockGroups);
-        HelpfulHitboxes.COMPATIBLE_BLOCKS = new HelpfulHitboxes.CompatibleBlockList(ungrouped, blockGroups);
+    public static void applyConfig(JsonObject json) {
+        if (Optional.ofNullable(json.get("all_blocks_use_full_hitboxes")).orElse(new JsonPrimitive("")).getAsBoolean())
+            HelpfulHitboxes.ALL_BLOCKS_COMPATIBLE = true;
+        else try {
+            HashSet<String> ungrouped = new HashSet<>();
+            HashSet<HashSet<String>> blockGroups = new HashSet<>();
+            readBlocklistFromJson(json.getAsJsonArray("compatible_blocks"), ungrouped, blockGroups);
+            HelpfulHitboxes.COMPATIBLE_BLOCKS = new HelpfulHitboxes.CompatibleBlockList(ungrouped, blockGroups);
+        } catch (JsonParseException e) {
+            HashSet<String> ungrouped = new HashSet<>();
+            HashSet<HashSet<String>> blockGroups = new HashSet<>();
+            readBlocklistFromJson(defaultConfigJson().getAsJsonArray("compatible_blocks"), ungrouped, blockGroups);
+        }
     }
 
-    private static JsonArray defaultCompatibleBlocksJson() {
+    private static JsonObject defaultConfigJson() {
         JsonArray compatibleBlocks = new JsonArray();
         compatibleBlocks.add("minecraft:chain");
         compatibleBlocks.add("minecraft:end_rod");
@@ -131,7 +139,10 @@ public class ModConfig {
         panesObject.add("group", panes);
         compatibleBlocks.add(panesObject);
 
-        return compatibleBlocks;
+        JsonObject config = new JsonObject();
+        config.addProperty("all_blocks_use_full_hitboxes", false);
+        config.add("compatible_blocks", compatibleBlocks);
+        return config;
     }
 
     private static void readBlocklistFromJson(JsonArray array, HashSet<String> ungrouped, HashSet<HashSet<String>> blockGroups) {

@@ -18,7 +18,7 @@ public class ModOptions {
             OptionInstance.cachedConstantTooltip(Component.translatable("options.helpfulhitboxes.toggle_hitboxes.tooltip")), /*not sure about no tooltip*/
             (component, bool) -> bool ? MOVEMENT_TOGGLE : MOVEMENT_HOLD,
             OptionInstance.BOOLEAN_VALUES,
-            true, //TODO this changes if the config option is on
+            true,
             bool -> {}
             );
     public static final ToggleKeyMapping DISABLE_BEHAVIOUR = new ToggleKeyMapping(
@@ -33,7 +33,7 @@ public class ModOptions {
             if (this.needsToggle.getAsBoolean() && bl) {
                 LocalPlayer player = Minecraft.getInstance().player;
                 if (player != null)
-                    player.displayClientMessage(!this.isDown() ? ENABLED_MESSAGE : DISABLED_MESSAGE, true);
+                    player.displayClientMessage((HelpfulHitboxes.ALL_BLOCKS_COMPATIBLE == this.isDown()) ? ENABLED_MESSAGE : DISABLED_MESSAGE, true);
             }
         }
     };

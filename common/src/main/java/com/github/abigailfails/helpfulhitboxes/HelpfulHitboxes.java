@@ -1,15 +1,11 @@
 package com.github.abigailfails.helpfulhitboxes;
 
-import com.mojang.blaze3d.platform.InputConstants;
-import net.minecraft.client.KeyMapping;
-import net.minecraft.client.OptionInstance;
-import net.minecraft.client.ToggleKeyMapping;
-
 import java.util.HashSet;
 
 //TODO implement keybind reader as suggested in the github issue
 public class HelpfulHitboxes {
     public static final String MOD_ID = "helpfulhitboxes";
+    public static boolean ALL_BLOCKS_COMPATIBLE = false;
     public static CompatibleBlockList COMPATIBLE_BLOCKS;
 
     public record CompatibleBlockList(HashSet<String> ungroupedBlocks, HashSet<HashSet<String>> blockGroups) {

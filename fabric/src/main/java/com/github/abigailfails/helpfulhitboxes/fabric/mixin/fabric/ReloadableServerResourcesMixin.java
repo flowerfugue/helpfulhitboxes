@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ReloadableServerResourcesMixin {
     @Inject(at = @At("TAIL"), method = "updateRegistryTags(Lnet/minecraft/core/RegistryAccess;)V")
     private void updateBlockListTags(RegistryAccess registryAccess, CallbackInfo ci) {
-        HelpfulHitboxes.COMPATIBLE_BLOCKS.updateTags();
+        if (HelpfulHitboxes.COMPATIBLE_BLOCKS != null)
+            HelpfulHitboxes.COMPATIBLE_BLOCKS.updateTags();
     }
 }

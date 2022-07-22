@@ -4,7 +4,7 @@ import com.github.abigailfails.helpfulhitboxes.ModConfig;
 import com.github.abigailfails.helpfulhitboxes.HelpfulHitboxes;
 import com.github.abigailfails.helpfulhitboxes.ModOptions;
 import com.google.gson.JsonArray;
-import net.minecraft.client.Minecraft;
+import com.google.gson.JsonObject;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
@@ -12,7 +12,6 @@ import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TagsUpdatedEvent;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -27,15 +26,15 @@ public class HelpfulHitboxesForge {
     }
 
     private void addClientReloadListeners(RegisterClientReloadListenersEvent event) {
-        event.registerReloadListener(new SimplePreparableReloadListener<JsonArray>() {
+        event.registerReloadListener(new SimplePreparableReloadListener<JsonObject>() {
             @Override
-            protected JsonArray prepare(ResourceManager resourceManager, ProfilerFiller profilerFiller) {
-                return ModConfig.readConfig(resourceManager, profilerFiller);
+            protected JsonObject prepare(ResourceManager resourceManager, ProfilerFiller profilerFiller) {
+                return ModConfig.readConfig();
             }
 
             @Override
-            protected void apply(JsonArray jsonArray, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
-                ModConfig.applyConfig(jsonArray, resourceManager, profilerFiller);
+            protected void apply(JsonObject jsonObject, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
+                ModConfig.applyConfig(jsonObject);
             }
         });
     }
@@ -45,7 +44,7 @@ public class HelpfulHitboxesForge {
     }
 
     private void onTagsUpdated(TagsUpdatedEvent event) {
-        if (event.getUpdateCause().equals(TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED))
+        if (event.getUpdateCause().equals(TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED) && HelpfulHitboxes.COMPATIBLE_BLOCKS != null)
             HelpfulHitboxes.COMPATIBLE_BLOCKS.updateTags();
     }
 }
