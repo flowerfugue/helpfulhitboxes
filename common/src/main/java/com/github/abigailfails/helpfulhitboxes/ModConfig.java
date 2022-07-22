@@ -87,9 +87,8 @@ public class ModConfig {
     }
 
     public static void applyConfig(JsonObject json) {
-        if (Optional.ofNullable(json.get("all_blocks_use_full_hitboxes")).orElse(new JsonPrimitive("")).getAsBoolean())
-            HelpfulHitboxes.ALL_BLOCKS_COMPATIBLE = true;
-        else try {
+        HelpfulHitboxes.ALL_BLOCKS_COMPATIBLE = Optional.ofNullable(json.get("all_blocks_use_full_hitboxes")).orElse(new JsonPrimitive("")).getAsBoolean();
+        if (!HelpfulHitboxes.ALL_BLOCKS_COMPATIBLE) try {
             HashSet<String> ungrouped = new HashSet<>();
             HashSet<HashSet<String>> blockGroups = new HashSet<>();
             readBlocklistFromJson(json.getAsJsonArray("compatible_blocks"), ungrouped, blockGroups);
@@ -98,7 +97,7 @@ public class ModConfig {
             HashSet<String> ungrouped = new HashSet<>();
             HashSet<HashSet<String>> blockGroups = new HashSet<>();
             readBlocklistFromJson(defaultConfigJson().getAsJsonArray("compatible_blocks"), ungrouped, blockGroups);
-        }
+        } else HelpfulHitboxes.COMPATIBLE_BLOCKS = null;
     }
 
     private static JsonObject defaultConfigJson() {

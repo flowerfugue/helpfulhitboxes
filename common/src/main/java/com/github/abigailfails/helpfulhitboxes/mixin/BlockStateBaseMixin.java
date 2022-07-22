@@ -26,10 +26,13 @@ public class BlockStateBaseMixin {
 
     @Inject(at = @At("HEAD"), method = "getShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;", cancellable = true)
     private void modifyGetShape(BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir) {
-        if (collisionContext instanceof EntityCollisionContext entityContext && entityContext.getEntity() instanceof Player player) {
-            if (HelpfulHitboxes.ALL_BLOCKS_COMPATIBLE && ModOptions.DISABLE_BEHAVIOUR.isDown())
-                cir.setReturnValue(Shapes.block());
-            else if (!ModOptions.DISABLE_BEHAVIOUR.isDown() && HelpfulHitboxes.COMPATIBLE_BLOCKS != null) {
+        if (collisionContext instanceof EntityCollisionContext entityContext && entityContext.getEntity() instanceof Player player && player.getLevel().isClientSide()) {
+            boolean allBlocksCompatible = HelpfulHitboxes.ALL_BLOCKS_COMPATIBLE;
+            boolean isDown = ModOptions.DISABLE_BEHAVIOUR.isDown();
+            if (allBlocksCompatible || isDown) {
+                if (allBlocksCompatible && isDown)
+                    cir.setReturnValue(Shapes.block());
+            } else if (!ModOptions.DISABLE_BEHAVIOUR.isDown() && HelpfulHitboxes.COMPATIBLE_BLOCKS != null) {
                 String targetName = this.getBlock().getDescriptionId();
                 if (HelpfulHitboxes.COMPATIBLE_BLOCKS.isCompatible(targetName, (entityContext.heldItem != null ? entityContext.heldItem : player.getMainHandItem()).getDescriptionId()) ||
                         HelpfulHitboxes.COMPATIBLE_BLOCKS.isCompatible(targetName, player.getOffhandItem().getDescriptionId()))
