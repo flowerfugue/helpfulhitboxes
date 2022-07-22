@@ -127,6 +127,7 @@ public class ModConfig {
         panes.add("minecraft:white_stained_glass_pane");
         panes.add("minecraft:yellow_stained_glass_pane");
         panes.add("minecraft:iron_bars");
+        panes.add("quark:gold_bars");
         JsonObject panesObject = new JsonObject();
         panesObject.add("group", panes);
         compatibleBlocks.add(panesObject);
@@ -144,7 +145,11 @@ public class ModConfig {
                 String string = element.getAsString();
                 if (string.charAt(0) == '#')
                     addTagElementsOrCache(string, ungrouped);
-                else ungrouped.add(Registry.BLOCK.get(new ResourceLocation(string)).getDescriptionId());
+                else {
+                    ResourceLocation resourceLocation = new ResourceLocation(string);
+                    if (Registry.BLOCK.containsKey(resourceLocation))
+                        ungrouped.add(Registry.BLOCK.get(resourceLocation).getDescriptionId());
+                }
             }
         }
     }
