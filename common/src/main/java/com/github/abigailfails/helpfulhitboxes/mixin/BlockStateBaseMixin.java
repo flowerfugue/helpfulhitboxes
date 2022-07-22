@@ -26,7 +26,7 @@ public class BlockStateBaseMixin {
 
     @Inject(at = @At("HEAD"), method = "getShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;", cancellable = true) //TODO should it really be getshape? this is only clientside but still, what if other entities use it
     private void modifyGetShape(BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext, CallbackInfoReturnable<VoxelShape> cir){
-        if (!ModOptions.DISABLE_BEHAVIOUR.isDown() && /*!ModOptions.BEHAVIOUR_DISABLED &&*/ HelpfulHitboxes.COMPATIBLE_BLOCKS != null && collisionContext instanceof EntityCollisionContext entityContext && entityContext.getEntity() instanceof Player player) {
+        if (!ModOptions.DISABLE_BEHAVIOUR.isDown() && HelpfulHitboxes.COMPATIBLE_BLOCKS != null && collisionContext instanceof EntityCollisionContext entityContext && entityContext.getEntity() instanceof Player player) {
             String targetName = this.getBlock().getDescriptionId();
             if (HelpfulHitboxes.COMPATIBLE_BLOCKS.isCompatible(targetName, (entityContext.heldItem != null ? entityContext.heldItem : player.getMainHandItem()).getDescriptionId()) ||
                     HelpfulHitboxes.COMPATIBLE_BLOCKS.isCompatible(targetName, player.getOffhandItem().getDescriptionId()))
