@@ -14,12 +14,6 @@ description = '''
 Makes the visual hitbox of certain small blocks larger when you're holding a block of that type, to help with building.
 '''
 
-[[mods]]
-modId = "jacksonsmixinhackerythisshouldnotbeloaded"
-version = "1.0"
-displayName = "Mixin Hack"
-description = "This mod shouldn't be loaded (fake news mod), but because of a bug so we have to resort to this. :blobtroll:"
-
 [[dependencies.helpfulhitboxes]]
 modId = "forge"
 mandatory = true
