@@ -1,26 +1,27 @@
 {
   "schema_version": 1,
-  "mixin": [
-    "examplemod.mixins.json",
-    "examplemod-common.mixins.json"
-  ],
   "quilt_loader": {
     "group": "${group}",
-    "id": "examplemod",
+    "id": "helpfulhitboxes",
     "version": "${version}",
-    "name": "Example Mod",
-    "description": "This is an example description! Tell everyone what your mod is about!",
-    "authors": ["Me!"],
-    "contact": {
-      "sources": "https://github.com/architectury/architectury-templates"
+    "metadata": {
+      "name": "Helpful Hitboxes",
+      "description": "Makes the visual hitbox of certain small blocks larger when you're holding a block of that type, to help with building.",
+      "contributors": {
+        "abigailfails": "Author"
+      },
+      "contact": {
+        "homepage": "https://www.curseforge.com/minecraft/mc-mods/helpful-hitboxes",
+        "sources": "https://github.com/abigailfails/HelpfulHitboxes",
+        "issues": "https://github.com/abigailfails/HelpfulHitboxes/issues"
+      },
+      "license": "GPL-3.0-only",
+      "icon": "assets/helpfulhitboxes/icon.png"
     },
-    "license": "Insert License Here",
-    "icon": "assets/examplemod/icon.png",
     "intermediate_mappings": "net.fabricmc:intermediary",
-    "environment": "*",
     "entrypoints": {
       "init": [
-        "net.examplemod.quilt.ExampleModQuilt"
+        "com.github.abigailfails.helpfulhitboxes.quilt.HelpfulHitboxesQuilt"
       ]
     },
     "depends": [
@@ -35,11 +36,14 @@
       {
         "id": "minecraft",
         "version": ">=1.19.3"
-      },
-      {
-        "id": "architectury",
-        "version": ">=7.1.78"
       }
     ]
-  }
+  },
+  "minecraft": {
+    "environment": "client"
+  },
+  "mixin": [
+    "helpfulhitboxes.mixins.json",
+    "helpfulhitboxes-common.mixins.json"
+  ]
 }

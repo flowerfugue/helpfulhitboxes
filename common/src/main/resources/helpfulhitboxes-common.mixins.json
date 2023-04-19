@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "com.github.abigailfails.helpfulhitboxes.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+    "OptionsMixin",
+    "AccessibilityOptionsScreenMixin"
+  ],
+  "mixins": [
+    "BlockStateBaseMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
