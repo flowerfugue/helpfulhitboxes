@@ -1,8 +1,0 @@
-{
-  "key.helpfulhitboxes.context_specific_hitboxes": "Disable Context-Specific Hitboxes",
-  "key.helpfulhitboxes.categories.helpfulhitboxes": "Helpful Hitboxes",
-  "options.helpfulhitboxes.toggle_hitboxes": "Hitbox Behaviour",
-  "options.helpfulhitboxes.toggle_hitboxes.tooltip": "Whether the keybind that disables or enables context-specific hitboxes from the Helpful Hitboxes mod should need to be held or toggled.",
-  "message.helpfulhitboxes.behaviour_enabled": "Context-specific block hitboxes enabled",
-  "message.helpfulhitboxes.behaviour_disabled": "Context-specific block hitboxes disabled"
-}

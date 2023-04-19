@@ -1,31 +1,31 @@
 {
   "schemaVersion": 1,
-  "id": "helpfulhitboxes",
+  "id": "examplemod",
   "version": "${version}",
-  "name": "Helpful Hitboxes",
-  "description": "Makes the visual hitbox of certain small blocks larger when you're holding a block of that type, to help with building",
+  "name": "Example Mod",
+  "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
-    "abigailfails"
+    "Me!"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/helpful-hitboxes",
-    "sources": "https://github.com/abigailfails/HelpfulHitboxes",
-    "issues": "https://github.com/abigailfails/HelpfulHitboxes/issues"
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
-  "license": "https://github.com/abigailfails/HelpfulHitboxes/blob/main/LICENSE",
-  "icon": "helpfulhitboxes.png",
+  "license": "Insert License Here",
+  "icon": "assets/examplemod/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.github.abigailfails.helpfulhitboxes.fabric.HelpfulHitboxesFabric"
+      "net.examplemod.fabric.ExampleModFabric"
     ]
   },
   "mixins": [
-    "helpfulhitboxes-common.mixins.json",
-    "helpfulhitboxes.mixins.json"
+    "examplemod.mixins.json",
+    "examplemod-common.mixins.json"
   ],
   "depends": {
     "fabric": "*",
-    "minecraft": ">=1.19"
+    "minecraft": ">=1.19.3",
+    "architectury": ">=7.1.78"
   }
 }
