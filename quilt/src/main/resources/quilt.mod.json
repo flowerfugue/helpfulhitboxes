@@ -20,9 +20,7 @@
     },
     "intermediate_mappings": "net.fabricmc:intermediary",
     "entrypoints": {
-      "init": [
-        "com.github.abigailfails.helpfulhitboxes.quilt.HelpfulHitboxesQuilt"
-      ]
+      "init": "com.github.abigailfails.helpfulhitboxes.quilt.HelpfulHitboxesQuilt"
     },
     "depends": [
       {

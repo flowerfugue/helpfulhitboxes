@@ -28,12 +28,12 @@ public class HelpfulHitboxesFabricLike {
 
             @Override
             public CompletableFuture<JsonArray> load(ResourceManager manager, ProfilerFiller profiler, Executor executor) {
-                return CompletableFuture.supplyAsync(() -> ModConfig.readConfig(manager, profiler), executor);
+                return CompletableFuture.supplyAsync(ModConfig::readConfig, executor);
             }
 
             @Override
             public CompletableFuture<Void> apply(JsonArray data, ResourceManager manager, ProfilerFiller profiler, Executor executor) {
-                return CompletableFuture.runAsync(() -> ModConfig.applyConfig(data, manager, profiler), executor);
+                return CompletableFuture.runAsync(() -> ModConfig.applyConfig(data), executor);
             }
         });
         KeyBindingHelper.registerKeyBinding(ModOptions.DISABLE_BEHAVIOUR);

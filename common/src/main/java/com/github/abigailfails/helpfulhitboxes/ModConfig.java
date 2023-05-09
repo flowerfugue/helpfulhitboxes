@@ -62,7 +62,7 @@ public class ModConfig {
         return false;
     }
 
-    public static JsonArray readConfig(ResourceManager resourceManager, ProfilerFiller profilerFiller) {
+    public static JsonArray readConfig() {
         JsonArray compatibleBlocks;
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try {
@@ -80,13 +80,13 @@ public class ModConfig {
                 reader.close();
             }
         } catch (IOException | JsonParseException e) {
-            HelpfulHitboxes.LOGGER.error("Cannot access HelpfulHitboxes config file or it is invalid, reverting to default value...");
+            HelpfulHitboxes.LOGGER.error("Cannot access HelpfulHitboxes config file or it is invalid, reverting to default configuration...", e);
             return defaultCompatibleBlocksJson();
         }
         return compatibleBlocks;
     }
 
-    public static void applyConfig(JsonArray json, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
+    public static void applyConfig(JsonArray json) {
         HashSet<String> ungrouped = new HashSet<>();
         HashSet<HashSet<String>> blockGroups = new HashSet<>();
         readBlocklistFromJson(json, ungrouped, blockGroups);

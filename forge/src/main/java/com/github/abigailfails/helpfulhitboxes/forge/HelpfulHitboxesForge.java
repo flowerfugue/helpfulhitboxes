@@ -28,12 +28,12 @@ public class HelpfulHitboxesForge {
         event.registerReloadListener(new SimplePreparableReloadListener<JsonArray>() {
             @Override
             protected JsonArray prepare(ResourceManager resourceManager, ProfilerFiller profilerFiller) {
-                return ModConfig.readConfig(resourceManager, profilerFiller);
+                return ModConfig.readConfig();
             }
 
             @Override
             protected void apply(JsonArray jsonArray, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
-                ModConfig.applyConfig(jsonArray, resourceManager, profilerFiller);
+                ModConfig.applyConfig(jsonArray);
             }
         });
     }
